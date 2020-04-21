@@ -16,26 +16,42 @@
 // // Learn more about service workers: https://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
+import { createStore } from 'redux';
+
 const add = document.getElementById('add');
 const minus = document.getElementById('minus');
 const number = document.querySelector('span');
-let count = 0;
 
-const updateText = () => {
-  number.innerText = count;
+number.innerText = 0;
+
+const ADD = 'ADD';
+const MINUS = 'MINUS';
+
+const reducer = (state = 0, action) => {
+  switch (action.type) {
+    case ADD:
+      return state + 1;
+    case MINUS:
+      return state - 1;
+    default:
+      return state;
+  }
 };
+
+const store = createStore(reducer);
+
+const onChange = () => {
+  number.innerText = store.getState();
+};
+
+store.subscribe(onChange);
 
 const handleAdd = () => {
-  count += 1;
-  updateText();
-  console.log('add value');
+  store.dispatch({ type: ADD });
 };
 const handleMinus = () => {
-  count += -1;
-  updateText();
-  console.log('minus value');
+  store.dispatch({ type: MINUS });
 };
 
 add.addEventListener('click', handleAdd);
 minus.addEventListener('click', handleMinus);
-number.innerText = count;
