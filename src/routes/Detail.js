@@ -15,7 +15,6 @@ function Detail({ todo }) {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(ownProps);
   const {
     match: {
       params: { id },
