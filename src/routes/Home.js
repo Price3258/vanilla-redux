@@ -33,10 +33,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log(dispatch);
   return {
     addTodo: (text) => dispatch(actionCreators.addTodo(text)),
-    deleteTodo: (id) => dispatch(actionCreators.deleteTodo(id)),
   };
 }
 
